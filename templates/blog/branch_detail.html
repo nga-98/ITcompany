@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="branch">
+    {% if is_MainManager %}
+        <a class="btn btn-default" href="{% url 'branch_edit' pk=branch.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'branch_remove' pk=branch.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+    {% endif %}
+        <h1>{{ branch.BranchName }} </h1>
+        <p>Контактный телефон: {{ branch.BranchPhone|linebreaksbr }}</p>
+        <p>Адрес: {{ branch.BranchAddress|linebreaksbr }}</p>
+    </div>
+{% endblock %}

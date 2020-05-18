@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="paymentmethod">
+        <a class="btn btn-default" href="{% url 'paymentmethod_edit'  pk=paymentmethod.pk  %}"><span class="glyphicon glyphicon-pencil"></span></a>
+         <a class="btn btn-default" href="{% url 'paymentmethod_remove' pk=paymentmethod.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <p><br> Тип оплаты: {{ paymentmethod.PaymentType|linebreaksbr }}</p>
+        <p>Наименование: {{ paymentmethod.PaymentName|linebreaksbr }}</p>
+    </div>
+{% endblock %}

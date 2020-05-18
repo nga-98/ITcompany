@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="contractg">
+     {% if user.is_staff %}
+             <a class="btn btn-default" href="{% url 'contract_edit' pk=contract.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+             <a class="btn btn-default" href="{% url 'contract_remove' pk=contract.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+     {% endif %}
+        <h1>Договор №{{ contract.ContractNumber }}</h1>
+            <p>Заказчик: {{ contract.Order.Client|linebreaksbr }}</p>
+            <p>Дата заключения: {{ contract.ContractDate|linebreaksbr }}</p>
+            <p>Дата окончания: {{ contract.ContractEndDate|linebreaksbr }}</p>
+            <p>Заказ: <a href="{% url 'order_detail' pk=contract.Order.pk %}">{{ contract.Order|linebreaksbr }}</a></p>
+            <p>Сумма: {{ contract.Order.OrderPrice|linebreaksbr }}</p>
+    </div>
+
+{% endblock %}

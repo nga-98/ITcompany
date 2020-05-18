@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="itservice">
+     {% if user.is_staff %}
+         <a class="btn btn-default" href="{% url 'itservice_edit' pk=itservice.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+         <a class="btn btn-default" href="{% url 'itservice_remove' pk=itservice.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+
+     {% endif %}
+            <h1>{{ itservice.ServiceName }} </h1>
+            <p>Тип услуги: {{ itservice.ServiceType|linebreaksbr }}</p>
+            <p>Цена: {{ itservice.ServicePrice|linebreaksbr }}</p>
+            <p>Период предоставления: {{ itservice.ServicePeriod|linebreaksbr }}</p>
+            <p>Период гарантии: {{ itservice.ServiceGaurantee|linebreaksbr }}</p>
+            <p>Описание: {{ itservice.ServiceDescription|linebreaksbr }}</p>
+            {% if user.is_staff %}
+                <p>Необходимое оборудование: </p>
+                {% for equip in equips %}
+                    <p><a href="{% url 'equipment_detail' pk=equip.pk %}">{{ equip.EquipmentName|linebreaksbr }}</a></p>
+                {% endfor %}
+            {% endif %}
+    </div>
+{% endblock %}

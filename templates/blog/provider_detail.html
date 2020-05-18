@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="stock">
+        <a class="btn btn-default" href="{% url 'provider_edit' pk=provider.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'provider_remove' pk=provider.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <h1> {{ provider.ProviderName }}</h1>
+        <p>Контактный телефон: {{ provider.ProviderPhone|linebreaksbr }}</p>
+        <p>E-mail: {{ provider.ProviderEmail|linebreaksbr }}</p>
+    </div>
+{% endblock %}

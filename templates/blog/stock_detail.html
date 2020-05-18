@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="stock">
+     <a class="btn btn-default" href="{% url 'stock_edit' pk=stock.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+       <a class="btn btn-default" href="{% url 'stock_remove' pk=stock.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <h1>Склад № {{ stock.id }}</h1>
+        <p>Контактный телефон: {{ stock.StockPhone|linebreaksbr }}</p>
+        <p>Адрес: {{ stock.StockAddress|linebreaksbr }}</p>
+    </div>
+{% endblock %}

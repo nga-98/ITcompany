@@ -1,0 +1,85 @@
+{% load static %}
+<html>
+    <head>
+        <title>IT-предприятие</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    </head>
+    <body>
+
+    <div class="menu">
+        <link rel="stylesheet" href="{% static 'css/menu1.css' %}"type='text/css'>
+    <ul>
+<li><a href="{% url 'home' %}">Главная</a></li>
+<li><a href="{% url 'product_list'  %}">IT-услуги</a></li>
+<li><a href="{% url 'branches_list'  %}">Контакты</a></li>
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <li><a href="#">Служебные данные</a>
+                <ul>
+                    <li><a href="{% url 'equipment_list'  %}">Оборудование</a></li>
+                    <li><a href="{% url 'stock_list'  %}">Склады</a></li>
+                    <li><a href="{% url 'provider_list'  %}">Поставщики</a></li>
+                    <li><a href="{% url 'department_list'  %}">Отделы</a></li>
+                    {% if is_MainManager %}
+                     <li><a href="{% url 'paymentmethod_list'  %}">Оплата</a></li>
+                    {% endif %}
+                </ul>
+                </li>
+                {% if is_MainManager %}
+                    <li><a href="#">Сотрудники</a>
+                <ul>
+                    <li><a href="{% url 'employeelist'  %}">Список сотрудников</a></li>
+                    <li><a href="{% url 'employee_new'  %}">Добавить сотрудника</a></li>
+                    <li><a href="{% url 'post_list'  %}">Должности</a></li>
+                </ul>
+                </li>
+                    {% else %}
+                    <li> <a href="{% url 'employeelist'  %}">Сотрудники</a></li>
+                    {% endif %}
+                <li><a href="{% url 'client_list'  %}">Список клиентов</a></li>
+                <li><a href="#">Заказы</a>
+                <ul>
+                    <li><a href="{% url 'order_list'  %}">Список заказов</a></li>
+                    <li> <a href="{% url 'ClientOrderForm'  %}">Новый заказ</a></li>
+                    <li><a href="{% url 'contract_list'  %}">Договоры</a></li>
+                </ul>
+             {% else %}
+                {% if client_z %}
+                    <li><a href="{% url 'order_new'  %}">Сделать заказ</a></li>
+                     <li><a href="{% url 'clientorder_list'  %}">Мои заказы</a></li>
+                    {% else %}
+                    <li><a href="{% url 'client_new'  %}">Добавить данные о себе</a></li>
+                    {% endif %}
+            {% endif %}
+        {% endif %}
+</ul>
+</div>
+<div class="page-header">
+    {% if user.is_authenticated %}
+        <a href="{% url 'home' %}" class="top-menu"></a>
+        <p class="top-menu">Добро пожаловать, {{ user.username }} <small>(<a href="{% url 'logout' %}">Выйти</a>)</small></p>
+    {% else %}
+        <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+    {% endif %}
+    <h1><a href="/">IT-предприятие</a></h1>
+</div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            <link rel="stylesheet" href="{% static 'css/button.css' %}"type='text/css'>
+     {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

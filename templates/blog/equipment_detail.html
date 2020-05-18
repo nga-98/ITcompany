@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="equipment">
+         {% if user.is_staff %}
+             <a class="btn btn-default" href="{% url 'equipment_edit' pk=equipment.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+             <a class="btn btn-default" href="{% url 'equipment_remove' pk=equipment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+         {% endif %}
+        <h1>{{ equipment.EquipmentName }}</h1>
+            <p>Количество: {{ equipment.EquipmentQuantity|linebreaksbr }}</p>
+            <p>Хранится на складе по адресу: {{ equipment.Stock|linebreaksbr }}</p>
+    </div>
+{% endblock %}

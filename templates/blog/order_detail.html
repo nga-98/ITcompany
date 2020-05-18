@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="order">
+         {% if user.is_staff %}
+             <a class="btn btn-default" href="{% url 'order_edit' pk=order.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+             <a class="btn btn-default" href="{% url 'order_remove' pk=order.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        {% endif %}
+        <h1> Заказ №{{ order.id }}</h1>
+            <p>Заказчик: {{ order.Client|linebreaksbr }}</p>
+            <p>Заказанные услуги: </p>
+            {% for service in services %}
+                <p><a href="{% url 'itservice_detail' pk=service.pk %}">{{ service.ServiceName|linebreaksbr }}</a></p>
+            {% endfor %}
+            <p>Дата заказа: {{ order.OrderDate|linebreaksbr }}</p>
+            <p>Способ оплаты: {{ order.PaymentMethod|linebreaksbr }}</p>
+            <p>Дополнительные требования: {{ order.OrderRequirement|linebreaksbr }}</p>
+            <p>Статус заказа: {{ order.OrderStatus|linebreaksbr }}</p>
+            <p>Ответственный сотрудник: {{ order.Employee|linebreaksbr }}</p>
+            <p>Цена заказа: {{ order.OrderPrice|linebreaksbr }}</p>
+    </div>
+{% endblock %}

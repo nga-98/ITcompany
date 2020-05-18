@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>Результаты поиска: </h1>
+
+<ul>
+  {% for client in object_list %}
+    <li>
+      <a href="{% url 'client_detail' pk=client.pk %}">{{ client.ClientSurname }} {{ client.ClientName }} {{ client.ClientPatronymic }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

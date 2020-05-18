@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% if is_MainManager %}
+        <a class="btn btn-default" href="{% url 'department_edit' pk=department.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'department_remove' pk=department.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+    {% endif %}
+    <div class="department">
+        <h1>{{ department.DepartmentName }}</h1>
+        <p>Номер отдела: {{ department.DepartmentNumber|linebreaksbr }}</p>
+        <p>Расположен в филиале: {{ department.Branch|linebreaksbr }}</p>
+        <p>Список работающих в отделе сотрудников:</p>
+    {% for emp in employees %}
+        <p><a href="{% url 'employee_detail' pk=emp.pk %}">{{ emp.EmpSurname|linebreaksbr }} {{ emp.EmpName|linebreaksbr }} {{ emp.EmpPatronymic|linebreaksbr }}</a></p>
+    {% endfor %}
+    </div>
+{% endblock %}

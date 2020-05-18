@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <a href="{% url 'empclient_new'  %}" class="button">Добавить нового клиента</a>
+    <p><br>Поиск по имени или фамилии клиента:</p>
+<form action="{% url 'client_search' %}" class="navbar-form navbar-left" method="get">
+    <div class="form-group">
+        <input type="text" name="q" class="form-control" placeholder="Введите запрос">
+    </div>
+    <button type="submit" class="btn btn-default">Поиск</button>
+<br>
+</form>
+    <p><br><br>   </p>
+    <p>Список клиентов:</p>
+    {% for client in object_list %}
+        <div>
+            <h3><a href="{% url 'client_detail' pk=client.pk %}">{{ client.ClientSurname }} {{ client.ClientName }} {{ client.ClientPatronymic }}</a></h3>
+        </div>
+    {% endfor %}
+    <div class = "container">
+      <div class = "col-md-6">
+        <ul class="pager">
+          <span class="step-links">
+            {% if object_list.has_previous %}
+            <li class="previous"> <a href="?page={{ object_list.previous_page_number }}">Предыдущая страница</a></li>
+            {% else %}
+            <li class="previous"> <a title = "No Posts available">Предыдущая страница</a></li>
+            {% endif %}
+            {% if object_list.has_next %}
+            <li class="next"><a href="?page={{ object_list.next_page_number }}">Следующая страница</a></li>
+            {% else %}
+            <li class="next"><a title = "No Posts available">Следующая страница</a></li>
+            {% endif %}
+            </span>
+         </ul>
+      </div>
+    </div>
+{% endblock %}

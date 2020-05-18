@@ -1,0 +1,66 @@
+
+    .menu ul{
+        display:block;
+        margin:0px;
+        padding-left: 0; /*убираем отступы*/
+        height:auto;
+        list-style:none;
+        background:#E100FF;
+    }
+
+   .menu > ul{
+        text-align:justify;
+        font-size:1px;
+        line-height:1px;
+    }
+    .menu > ul::after{
+        display:inline-block;
+        height:0px;
+        content:" ";
+    }
+        .menu ul li{
+            position:relative;
+            display:inline-block;
+            width:auto;
+            height:auto;
+            vertical-align:top;
+            text-align:left;
+        }
+            .menu ul li a{
+                display:block;
+                padding:9px 35px 0px 35px;
+                font-size:14px;
+                font-family: arial;
+                color:#ffffef;
+                line-height:1.3em;
+                text-decoration:none;
+                font-weight:bold;
+                height:36px;
+                box-sizing:border-box;
+            }
+.menu a:hover {
+  background:#dda0dd;/*добавляем эффект при наведении*/
+}
+          .menu ul li ul{
+    position:absolute;
+    top:36px;
+    left:0px;
+    display:none;
+    width:200px;
+    background: #B50DFF;
+}
+.menu ul li:hover ul{display:block;}/*эта строчка реализует механизм выпадения*/
+    .menu ul li ul li{
+        float:none;
+        width:100%;
+    }
+        .menu ul li ul li a{
+            display:block;
+            text-transform:none;
+            height:auto;
+            padding:7px 25px;
+            width:100%;
+            box-sizing:border-box;
+            border-top:1px solid #ffffff;
+        }
+        .menu ul li ul li:first-child a{border-top:0px;}

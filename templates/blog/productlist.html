@@ -1,0 +1,55 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.TypeName }}{% else %}Каталог IT-услуг{% endif %}
+{% endblock %}
+{% block content %}
+    {% if user.is_staff %}
+    <a href="{% url 'itservice_new' %}" class="button">Добавить IT-услугу</a>
+    {% endif %}
+    {% if is_MainManager %}
+       <a href="{% url 'servicetype_new'  %}" class="button">Добавить тип IT-услуги</a>
+    {% endif %}
+     <div class="menu1">
+        <link rel="stylesheet" href="{% static 'css/menu.css' %}"type='text/css'>
+    <div id="sidebar">
+        <h3>Типы услуг:</h3>
+        <ul>
+            <li {% if not category %}class="selected"{% endif %}>
+                <a href="{% url "product_list" %}">All</a>
+            </li>
+            {% for c in categories %}
+                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                    <a href="{{ c.get_absolute_url }}">{{ c.TypeName }}</a>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+     </div>
+    <div id="main" class="product-list">
+        <h1>{% if category %}
+            {% if is_MainManager %}
+    <a href="{% url 'servicetype_detail' pk=category.pk %}">{{ category.TypeName }}</a>
+               {% else %}
+                 {{ category.TypeName }}
+            {% endif %}
+        {% else %}
+            Список услуг, предоставляемых предприятием:
+        {% endif %}</h1>
+        {% if category %}
+            <img src="{{ category.image.url }}" alt="{{ category.TypeName }}" width=300px>
+            <p>{{ category.TypeDescription }}</p>
+        {% endif %}
+        <form action="" method="get">
+    {{ form.as_p }}
+    <input type="submit" value="Поиск">
+    </form>
+        {% for product in products %}
+            <div class="item">
+                <h3><a href="{% url 'itservice_detail' pk=product.pk %}">{{ product.ServiceName }}</a></h3>
+                <p>Цена:{{ product.ServicePrice }} р.</p><br>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

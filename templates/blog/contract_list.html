@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    {% if user.is_staff %}
+   <a href="{% url 'contract_new' %}" class="button">Добавить новый договор</a>
+    {% endif %}
+    <p><br></p>
+
+{{ form.media }}
+    <form action="" method="get">
+    {{ form.as_p }}
+    <input type="submit" value="Поиск">
+    </form>
+    <table border="3" width="600">
+    <td>Договор</td>
+    <td>Дата заключения</td>
+    <td>Дата окончания</td>
+    <td>Сумма договора</td>
+    {% for c in object_list %}
+        <div>
+        <tr>
+            <td><a href="{% url 'contract_detail' pk=c.pk %}">Договор номер № {{ c.ContractNumber }}</a> </td>
+            <td>{{ c.ContractDate }}</td>
+            <td>{{ c.ContractEndDate}}</td>
+            <td>{{ c.Order.OrderPrice }}</td>
+        </tr>
+        </div>
+    {% endfor %}
+    </table>
+<p>Общая сумма: {{ pr }}</p>
+{% endblock %}

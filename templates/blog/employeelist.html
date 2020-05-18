@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% if is_MainManager %}
+       <a href="{% url 'employee_new'  %}" class="button">Добавить сотрудника</a>
+    {% endif %}
+    <p><br>Поиск по имени или фамилии сотрудника:</p>
+<form action="{% url 'employee_search' %}" class="navbar-form navbar-left" method="get">
+    <div class="form-group">
+        <input type="text" name="q" class="form-control" placeholder="Введите запрос">
+    </div>
+    <button type="submit" class="btn btn-default">Поиск</button>
+<br>
+</form>
+    <p><br><br>   </p>
+    {% for employee in object_list %}
+        <div>
+            <h2><a href="{% url 'employee_detail' pk=employee.pk %}"> {{ employee.EmpName }} {{ employee.EmpSurname}} {{ employee.EmpPatronymic }}</a></h2>
+            <p>Должность: {{ employee.Post|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+    <div class = "container">
+      <div class = "col-md-6">
+        <ul class="pager">
+          <span class="step-links">
+            {% if object_list.has_previous %}
+            <li class="previous"> <a href="?page={{ object_list.previous_page_number }}">Предыдущая страница</a></li>
+            {% else %}
+            <li class="previous"> <a title = "No Posts available">Предыдущая страница</a></li>
+            {% endif %}
+            {% if object_list.has_next %}
+            <li class="next"><a href="?page={{ object_list.next_page_number }}">Следующая страница</a></li>
+            {% else %}
+            <li class="next"><a title = "No Posts available">Следующая страница</a></li>
+            {% endif %}
+            </span>
+         </ul>
+      </div>
+    </div>
+{% endblock %}

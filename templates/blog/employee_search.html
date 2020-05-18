@@ -1,0 +1,14 @@
+ {% extends 'blog/base.html' %}
+{% block content %}
+<h1>Результаты поиска: </h1>
+
+<ul>
+
+  {% for emp in object_list %}
+    <li>
+      <a href="{% url 'employee_detail' pk=emp.pk %}">{{ emp.EmpSurname }} {{ emp.EmpName }} {{ emp.EmpPatronymic }}</a>
+    </li>
+  {% endfor %}
+
+</ul>
+{% endblock %}

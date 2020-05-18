@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="employee">
+     {% if user.is_authenticated %}
+         <a class="btn btn-default" href="{% url 'servicetype_edit' pk=servicetype.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+         <a class="btn btn-default" href="{% url 'servicetype_remove' pk=servicetype.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+     {% endif %}
+    <br>
+    <br>
+<img src="{{ servicetype.image.url }}" alt="{{ servicetype.TypeName }}" width=300px>
+        <h1>{{ servicetype.TypeName }}</h1>
+            <p>{{ servicetype.TypeDescription|linebreaksbr }} </p>
+    </div>
+{% endblock %}

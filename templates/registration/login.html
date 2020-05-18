@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+    <h1>Авторизация</h1>
+    {% if form.errors %}
+        <p>
+            Ваш логин или пароль не соответствуют.
+            Пожалуйста, попробуйте ещё раз.
+        </p>
+    {% else %}
+        <p>Пожалуйста, введите свой логин и пароль, чтобы войти. Если у вас нет аккаунта, то вы можете <a href="{% url "register" %}">зарегистрироваться</a></p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <p><input type="submit" value="Войти"></p>
+        </form>
+    </div>
+{% endblock %}

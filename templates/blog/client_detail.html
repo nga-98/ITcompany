@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="client">
+    {% if user.is_staff %}
+        <a class="btn btn-default" href="{% url 'empclient_edit' pk=client.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+         <a class="btn btn-default" href="{% url 'client_remove' pk=client.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        {% else %}
+    <a class="btn btn-default" href="{% url 'client_edit' pk=client.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    {% endif %}
+        <h1>{{ client.ClientName }} {{ client.ClientSurname}} {{ client.ClientPatronymic }}</h1>
+        <p>{{ client.User }}</p>
+        <p>Телефон клиента: {{ client.ClientPhone|linebreaksbr }}</p>
+        <p>E-mail клиента: {{ client.ClientEmail|linebreaksbr }}</p>
+    {% for order in orders %}
+        <p><a href="{% url 'order_detail' pk=order.pk %}">Заказ №{{ order.id|linebreaksbr }}</a></p>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+a.button {
+display: inline-block;
+font-family: Arial;
+font-size: 11px;
+color: #5e225e;
+text-shadow: 0 -1px rgb(46,53,58);
+text-decoration: none;
+user-select: none;
+line-height: 2em;
+padding: 1px 1.2em;
+outline: none;
+border: 1px solid rgba(33,43,52,1);
+border-radius: 3px;
+background: #cda4de;
+}
+a.button:active {
+box-shadow:
+inset 0 1px 3px rgba(0,10,20,.5),
+0 1px rgb(83,94,104),
+0 0 1px rgb(86,96,106);
+}
+a.button:focus:not(:active) {
+border: 1px solid rgb(22,32,43);
+border-bottom: 1px solid rgb(25,34,45);
+background: #cda4de;
+pointer-events: none;
+}

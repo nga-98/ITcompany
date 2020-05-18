@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="employee">
+     {% if user.is_staff %}
+             <a class="btn btn-default" href="{% url 'employee_edit' pk=employee.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+             <a class="btn btn-default" href="{% url 'employee_remove' pk=employee.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+     {% endif %}
+        <h1>{{ employee.EmpName }} {{ employee.EmpSurname}} {{ employee.EmpPatronymic }}</h1>
+            <p>Должность: {{ employee.Post|linebreaksbr }}</p>
+            <p>Телефон: {{ employee.EmpPhone|linebreaksbr }}</p>
+            <p>E-mail: {{ employee.EmpEmail|linebreaksbr }}</p>
+            <p>Отдел: {{ employee.Department|linebreaksbr }}</p>
+    </div>
+{% endblock %}

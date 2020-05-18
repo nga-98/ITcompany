@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% if is_MainManager %}
+       <a href="{% url 'paymentmethod_new'  %}" class="button">Добавить способ оплаты</a>
+    {% endif %}
+<table border="1" width="600">
+<td>Наименование</td>
+<td>Тип</td>
+    {% for paymentmethod in object_list %}
+        <div>
+        <tr>
+            <td><a href="{% url 'paymentmethod_detail' pk=paymentmethod.pk %}">{{ paymentmethod.PaymentName }}</a></td>
+            <td>{{ paymentmethod.PaymentType }}</td>
+        </tr>
+        </div>
+    {% endfor %}
+</table>
+
+{% endblock %}
